@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -100,6 +99,15 @@ public class Order implements Serializable {
 
 	public Set<OrderItem> getItems() {
 		return items;
+	}
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for(OrderItem orderItem : items) {
+			sum += orderItem.getSubTotal();
+		}
+		
+		return sum;
 	}
 
 	@Override
